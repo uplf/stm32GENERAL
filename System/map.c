@@ -172,6 +172,34 @@ uint16_t TimIndexToPWMPins(TIM_TypeDef *TIMx,uint16_t AF_INDEX){
 	}
 	return AFP;
 }
+uint32_t TIMxtoRCCPeriph(TIM_TypeDef *TIMx)
+{
+    if (TIMx == TIM1)             // 高级定时器 TIM1，位于 APB2 总线
+        return RCC_APB2Periph_TIM1;
+    else if (TIMx == TIM2)        // 普通定时器 TIM2，位于 APB1 总线
+        return RCC_APB1Periph_TIM2;
+    else if (TIMx == TIM3)        // 普通定时器 TIM3，位于 APB1 总线
+        return RCC_APB1Periph_TIM3;
+    else if (TIMx == TIM4)        // 普通定时器 TIM4，位于 APB1 总线
+        return RCC_APB1Periph_TIM4;
+    else if (TIMx == TIM5)        // 普通定时器 TIM5，位于 APB1 总线
+        return RCC_APB1Periph_TIM5;
+    else if (TIMx == TIM6)        // 基本定时器 TIM6，位于 APB1 总线
+        return RCC_APB1Periph_TIM6;
+    else if (TIMx == TIM7)        // 基本定时器 TIM7，位于 APB1 总线
+        return RCC_APB1Periph_TIM7;
+    else
+        return 0;                 // 无效定时器，返回 0
+}
 
 
+uint32_t ADCxtoRCC_Periph(ADC_TypeDef *ADCx)
+{
+    if (ADCx == ADC1)            // ADC1 位于 APB2 总线
+        return RCC_APB2Periph_ADC1;
+    else if (ADCx == ADC2)       // ADC2 位于 APB2 总线
+        return RCC_APB2Periph_ADC2;
+    else
+        return 0;                // 无效 ADC 外设，返回 0
+}
 
