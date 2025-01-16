@@ -63,7 +63,11 @@ int8_t timerINT_preset(TIM_TypeDef* TIMx)
 	return TIMxtoIRQn(TIMx);
 }
 
-
+int8_t usartINT_set(USART_TypeDef* USARTx)
+{
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);			//开启串口接收数据的中断
+	return USARTxtoIRQn(USARTx);
+}
 
 	
 void INT_setNVIC(uint8_t NVIC_IRQChannel,uint8_t PP,uint8_t SP,FunctionalState x){
@@ -185,7 +189,6 @@ void sADC_setMODE(uint8_t ADC_Channel_x,ADC_TypeDef* ADCx)
 		while (ADC_GetFlagStatus(ADCx, ADC_FLAG_EOC) == RESET);	//等待EOC标志位，即等待AD转换结束
 		return ADC_GetConversionValue(ADC1);					//读数据寄存器，得到AD转换的结果
 	}
-	
 	
 	
 	

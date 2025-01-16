@@ -39,6 +39,8 @@ int8_t gpioINT_setEXTI(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin_x,EXTITrigger_Type
 //for GPIO INT<above>
 int8_t timerINT_preset(TIM_TypeDef* TIMx);
 //for TIMER INT<above>
+int8_t usartINT_set(USART_TypeDef* USARTx);
+//for USART INT<above>
 
 //step3:set NVIC using channel
 void INT_setNVIC(uint8_t NVIC_IRQChannel,uint8_t PP,uint8_t SP,FunctionalState x);
@@ -95,6 +97,65 @@ void TIM2_IRQHandler(void)
 	}
 }
 */
+/*
+
+
+  * 函    数：USART1中断函数
+  * 参    数：无
+  * 返 回 值：无
+  * 注意事项：此函数为中断函数，无需调用，中断触发后自动执行
+  *           函数名为预留的指定名称，可以从启动文件复制
+  *           请确保函数名正确，不能有任何差异，否则中断函数将不能进入
+
+void USART1_IRQHandler(void)
+{
+	static uint8_t RxState = 0;		//定义表示当前状态机状态的静态变量
+	static uint8_t pRxPacket = 0;	//定义表示当前接收数据位置的静态变量
+	if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET)		//判断是否是USART1的接收事件触发的中断
+	{
+		uint8_t RxData = USART_ReceiveData(USART1);				//读取数据寄存器，存放在接收的数据变量
+		
+		//使用状态机的思路，依次处理数据包的不同部分
+		
+		//当前状态为0，接收数据包包头
+		if (RxState == 0)
+		{
+			if (RxData == 0xFF)			//如果数据确实是包头
+			{
+				RxState = 1;			//置下一个状态
+				pRxPacket = 0;			//数据包的位置归零
+			}
+		}
+		//当前状态为1，接收数据包数据
+		else if (RxState == 1)
+		{
+			Serial_RxPacket[pRxPacket] = RxData;	//将数据存入数据包数组的指定位置
+			pRxPacket ++;				//数据包的位置自增
+			if (pRxPacket >= 4)			//如果收够4个数据
+			{
+				RxState = 2;			//置下一个状态
+			}
+		}
+		//当前状态为2，接收数据包包尾
+		else if (RxState == 2)
+		{
+			if (RxData == 0xFE)			//如果数据确实是包尾部
+			{
+				RxState = 0;			//状态归0
+				Serial_RxFlag = 1;		//接收数据包标志位置1，成功接收一个数据包
+			}
+		}
+		
+		USART_ClearITPendingBit(USART1, USART_IT_RXNE);		//清除标志位
+	}
+}
+
+
+
+*/
+
+
+
 
 
 /*****Section3:timer_configuration
@@ -144,14 +205,5 @@ void TIM2_IRQHandler(void)
 
 //DMA这里省略
 
-
-
-/******Section5:Communication
-1.usart
-2.iic
-3.spi
-*/
-	//part1:serial
-		//step1:config pins pinA->AF_PP,pinB->IPU
-		void USART_setMODE()
+		
 #endif

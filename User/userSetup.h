@@ -1,6 +1,11 @@
 #ifndef __PIN_SETUP
 #define __PIN_SETUP
 
+/*******Section0:ATTENTION
+1.<PIN>SPI communication is fixed attached to the following pins, which means these pins can't
+	be assigned to other usage once SPI is activated
+	PA4 PA5 PA6 PA7
+*/
 
 /*******Section1:basic hardware Setup
 1.OLED_PINS

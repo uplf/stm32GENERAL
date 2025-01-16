@@ -680,6 +680,16 @@
               <FileType>5</FileType>
               <FilePath>.\System\map.h</FilePath>
             </File>
+            <File>
+              <FileName>comCONFgeneral.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\System\comCONFgeneral.c</FilePath>
+            </File>
+            <File>
+              <FileName>comCONFgeneral.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\System\comCONFgeneral.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

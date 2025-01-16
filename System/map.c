@@ -174,8 +174,11 @@ uint16_t TimIndexToPWMPins(TIM_TypeDef *TIMx,uint16_t AF_INDEX){
 }
 uint32_t TIMxtoRCCPeriph(TIM_TypeDef *TIMx)
 {
-    if (TIMx == TIM1)             // 高级定时器 TIM1，位于 APB2 总线
-        return RCC_APB2Periph_TIM1;
+    if (TIMx == TIM1)             // 高级定时器 TIM1，位于 APB2 总线,这里单独配置
+		{
+				RCC_APB1PeriphClockCmd(TIMxtoRCCPeriph(TIMx), ENABLE);
+        return 0;
+		} 
     else if (TIMx == TIM2)        // 普通定时器 TIM2，位于 APB1 总线
         return RCC_APB1Periph_TIM2;
     else if (TIMx == TIM3)        // 普通定时器 TIM3，位于 APB1 总线
@@ -203,3 +206,23 @@ uint32_t ADCxtoRCC_Periph(ADC_TypeDef *ADCx)
         return 0;                // 无效 ADC 外设，返回 0
 }
 
+
+int32_t USARTxtoIRQn(USART_TypeDef *USARTx)
+{
+    if (USARTx == USART1)
+        return USART1_IRQn;
+    else if (USARTx == USART2)
+        return USART2_IRQn;
+    else if (USARTx == USART3)
+        return USART3_IRQn;
+#if defined(USART4) // 如果芯片支持 USART4
+    else if (USARTx == USART4)
+        return USART4_IRQn;
+#endif
+#if defined(USART5) // 如果芯片支持 USART5
+    else if (USARTx == USART5)
+        return USART5_IRQn;
+#endif
+    else
+        return -1; // 无效 USART 外设
+}
