@@ -1,5 +1,5 @@
-#ifndef __MAP
-#define __MAP
+#ifndef __MAP_H
+#define __MAP_H
 #include "stm32f10x.h"                  // Device header
 
 uint32_t GPIOToRCCPeriph(GPIO_TypeDef*);//映射函数，将GPIOx转为RCC配置变量
@@ -12,4 +12,7 @@ uint16_t TimIndexToPWMPins(TIM_TypeDef *TIMx,uint16_t AF_INDEX);
 uint32_t TIMxtoRCCPeriph(TIM_TypeDef *TIMx);
 uint32_t ADCxtoRCC_Periph(ADC_TypeDef *ADCx);
 int32_t USARTxtoIRQn(USART_TypeDef *USARTx);
+
+
+
 #endif

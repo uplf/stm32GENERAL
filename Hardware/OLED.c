@@ -2,7 +2,6 @@
 #include "OLED_Font.h"
 #include "userSetup.h"
 #include "CONFgeneral.h"
-
 #define OLED_W_SCL(x)		GPIO_WriteBit(OLED_W_Port, OLED_W_SCL_Pin, (BitAction)(x))
 #define OLED_W_SDA(x)		GPIO_WriteBit(OLED_W_Port, OLED_W_SDA_Pin, (BitAction)(x))
 

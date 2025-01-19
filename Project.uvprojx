@@ -740,6 +740,16 @@
               <FileType>5</FileType>
               <FilePath>.\Hardware\hwCONFIGgen.h</FilePath>
             </File>
+            <File>
+              <FileName>drive.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\drive.c</FilePath>
+            </File>
+            <File>
+              <FileName>drive.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\drive.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

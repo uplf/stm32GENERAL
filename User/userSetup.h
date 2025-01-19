@@ -12,8 +12,29 @@
 */
 
 //OLED_PINS
-#define OLED_W_SCL_Pin GPIO_Pin_0
-#define OLED_W_SDA_Pin GPIO_Pin_1
-#define OLED_W_Port GPIOA
+#define OLED_W_SCL_Pin GPIO_Pin_3
+#define OLED_W_SDA_Pin GPIO_Pin_4
+#define OLED_W_Port GPIOB
+
+//2.TB6612 conf_PINS
+#define DRIVE_AIN1_GROUP GPIOB
+#define DRIVE_AIN2_GROUP GPIOB
+#define DRIVE_BIN1_GROUP GPIOB
+#define DRIVE_BIN2_GROUP GPIOB
+#define DRIVE_AIN1_PIN GPIO_Pin_14
+#define DRIVE_AIN2_PIN GPIO_Pin_15
+#define DRIVE_BIN1_PIN GPIO_Pin_13
+#define DRIVE_BIN2_PIN GPIO_Pin_12
+
+//3.CONFIG
+#define REUSE_INIT 1
+
+/*******Section2:index Setup
+1.Speed*/
+#define BASIC_SPEED 50
+//1-100
+#define ALTER_UNIT 1
+#define INV_ABLE 1
+
 
 #endif

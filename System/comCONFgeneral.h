@@ -65,5 +65,5 @@ extern uint8_t Serial_RxFlag;					//定义接收数据包标志位
 			
 			
 	//part3.SPI(hardware)setting
-			void SPI
+
 #endif

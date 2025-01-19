@@ -135,7 +135,7 @@ IRQn_Type TIMxtoIRQn(TIM_TypeDef *TIMx)
 
 uint16_t TimIndexToPWMPins(TIM_TypeDef *TIMx,uint16_t AF_INDEX){
 	uint16_t AFP=0x00;
-	if(!(AF_INDEX&0x8000)){
+	if(!(AF_INDEX&0x800)){
 		if(TIMx==TIM1){
 			AFP=(AF_INDEX&0x01)?(AFP|GPIO_Pin_8):AFP;
 			AFP=(AF_INDEX&0x02)?(AFP|GPIO_Pin_9):AFP;
@@ -151,6 +151,7 @@ uint16_t TimIndexToPWMPins(TIM_TypeDef *TIMx,uint16_t AF_INDEX){
 		}
 		else if(TIMx==TIM3)
 		{
+			
 			AFP=(AF_INDEX&0x01)?(AFP|GPIO_Pin_6):AFP;
 			AFP=(AF_INDEX&0x02)?(AFP|GPIO_Pin_7):AFP;
 		}
@@ -163,10 +164,12 @@ uint16_t TimIndexToPWMPins(TIM_TypeDef *TIMx,uint16_t AF_INDEX){
 		}
 		else if(TIMx==TIM4)
 		{
+
 			AFP=(AF_INDEX&0x01)?(AFP|GPIO_Pin_6):AFP;
 			AFP=(AF_INDEX&0x02)?(AFP|GPIO_Pin_7):AFP;
 			AFP=(AF_INDEX&0x04)?(AFP|GPIO_Pin_8):AFP;
 			AFP=(AF_INDEX&0x08)?(AFP|GPIO_Pin_9):AFP;
+
 		}
 	
 	}
@@ -176,7 +179,7 @@ uint32_t TIMxtoRCCPeriph(TIM_TypeDef *TIMx)
 {
     if (TIMx == TIM1)             // 高级定时器 TIM1，位于 APB2 总线,这里单独配置
 		{
-				RCC_APB1PeriphClockCmd(TIMxtoRCCPeriph(TIMx), ENABLE);
+				RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
         return 0;
 		} 
     else if (TIMx == TIM2)        // 普通定时器 TIM2，位于 APB1 总线
@@ -226,3 +229,7 @@ int32_t USARTxtoIRQn(USART_TypeDef *USARTx)
     else
         return -1; // 无效 USART 外设
 }
+
+
+
+

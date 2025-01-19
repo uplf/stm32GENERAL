@@ -11,6 +11,7 @@
 #define _HIGH Bit_SET
 #define _LOW Bit_RESET
 
+void reuse_init();
 
 void PIN_setMODE(GPIO_TypeDef* GPIOx,uint16_t GPIO_Pin_x,GPIOMode_TypeDef MODE);
 //set the mode of a pin
@@ -169,7 +170,7 @@ void USART1_IRQHandler(void)
 
 //step2:apply <section2->step2> for INT, <following> for OC & IC
 	//step2(PWM).1,setPWMmode
-		void PWM_setMODE(TIM_TypeDef* TIMx);
+		void PWM_setMODE(TIM_TypeDef* TIMx,uint16_t INDEX);
 	//step2(PWM).2,IO_AF
 		void PWM_setIO(TIM_TypeDef* TIMx,uint16_t AF_INDEX);
 		/*param2:
@@ -178,7 +179,7 @@ void USART1_IRQHandler(void)
 		ej:to activate PWM CH1、CH3,param2 should be 0b...0101
 		*/
 	//stepx(PWM).计算CCR
-		uint16_t dutyPWM_calCCR(TIM_TypeDef* TIMx,uint16_t duty);
+		uint16_t dutyPWM_calCCR(TIM_TypeDef* TIMx,uint16_t duty,uint16_t ARR);
 		
 	//step2(IC).1,setGPIO--GPIO_Mode_IPU
 	//step2(IC).2,PWMI
@@ -188,7 +189,8 @@ void USART1_IRQHandler(void)
 		uint32_t PWMI_getDUTY(TIM_TypeDef* TIMx);//##无效果
 //step3:manipulate timer with TIM_Cmd(TIMx,EN/DISABLE)<omit>
 
-
+//inner part
+void TIM_OCxInit(TIM_TypeDef* , TIM_OCInitTypeDef*,uint16_t);
 
 
 /*******Section4:AD & DMA

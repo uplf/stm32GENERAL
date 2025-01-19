@@ -1,6 +1,6 @@
 #include "CONFgeneral.h"
 #include "map.h"
-
+#include "userSetup.h"
 
 void PIN_setMODE(GPIO_TypeDef* GPIOx,uint16_t GPIO_Pin_x,GPIOMode_TypeDef MODE)
 {
@@ -30,6 +30,13 @@ void PIN_writeBIT(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin_x,BitAction x)
 	GPIO_WriteBit(GPIOx,GPIO_Pin_x,x);
 }
 
+
+void reuse_init(){
+	if(REUSE_INIT){
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO,ENABLE);
+		GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);
+	}
+}
 
 //section2
 void EXTI_setGROUP(uint32_t NVIC_PriorityGroup_x){
@@ -85,7 +92,7 @@ void INT_setNVIC(uint8_t NVIC_IRQChannel,uint8_t PP,uint8_t SP,FunctionalState x
 void TIMER_setMODE(TIM_TypeDef* TIMx,uint16_t period,uint16_t prescaler,uint16_t TIM_CounterMode_x)
 {
 
-	RCC_APB1PeriphClockCmd(TIMxtoRCCPeriph(TIMx), ENABLE);			//开启TIM2的时钟
+	RCC_APB1PeriphClockCmd(TIMxtoRCCPeriph(TIMx), ENABLE);			//开启TIMx的时钟
 	/*时基单元初始化*/
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;				//定义结构体变量
 	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;     //时钟分频，选择不分频，此参数用于配置滤波器时钟，不影响时基单元功能
@@ -93,7 +100,7 @@ void TIMER_setMODE(TIM_TypeDef* TIMx,uint16_t period,uint16_t prescaler,uint16_t
 	TIM_TimeBaseInitStructure.TIM_Period = period - 1;					//计数周期，即ARR的值
 	TIM_TimeBaseInitStructure.TIM_Prescaler = prescaler - 1;				//预分频器，即PSC的值
 	TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;            //重复计数器，高级定时器才会用到
-	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStructure);             //将结构体变量交给TIM_TimeBaseInit，配置TIM2的时基单元
+	TIM_TimeBaseInit(TIMx, &TIM_TimeBaseInitStructure);             //将结构体变量交给TIM_TimeBaseInit，配置TIMx的时基单元
 	
 }
 void freqTIMER_setMODE(TIM_TypeDef* TIMx,uint16_t freq,uint16_t TIM_CounterMode_x)
@@ -101,7 +108,7 @@ void freqTIMER_setMODE(TIM_TypeDef* TIMx,uint16_t freq,uint16_t TIM_CounterMode_
 	TIMER_setMODE( TIMx,10000,7200/freq, TIM_CounterMode_x);
 }
 
-void PWM_setMODE(TIM_TypeDef* TIMx)
+void PWM_setMODE(TIM_TypeDef* TIMx,uint16_t INDEX)
 {
 		/*输出比较初始化*/
 	TIM_OCInitTypeDef TIM_OCInitStructure;							//定义结构体变量
@@ -109,21 +116,28 @@ void PWM_setMODE(TIM_TypeDef* TIMx)
 																	//则最好执行此函数，给结构体所有成员都赋一个默认值
 																	//避免结构体初值不确定的问题
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;				//输出比较模式，选择PWM模式1
+
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;		//输出极性，选择为高，若选择极性为低，则输出高低电平取反
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;	//输出使能
 	TIM_OCInitStructure.TIM_Pulse = 0;								//初始的CCR值
-	TIM_OC1Init(TIMx, &TIM_OCInitStructure);						//将结构体变量交给TIM_OC1Init，配置TIM2的输出比较通道1
+
+	TIM_OCxInit(TIMx, &TIM_OCInitStructure,INDEX);						//将结构体变量交给TIM_OC1Init，配置TIM2的输出比较通道1
 }
 void PWM_setIO(TIM_TypeDef* TIMx,uint16_t AF_INDEX){
 	AF_INDEX=AF_INDEX&0x0F;
 	PIN_setMODE(GPIOA,TimIndexToPWMPins(TIMx,AF_INDEX),GPIO_Mode_AF_PP);
 	AF_INDEX=AF_INDEX|0x800;
+
 	PIN_setMODE(GPIOB,TimIndexToPWMPins(TIMx,AF_INDEX),GPIO_Mode_AF_PP);
+
 }
 
-uint16_t dutyPWM_calCCR(TIM_TypeDef* TIMx,uint16_t duty)
+#include "OLED.h"
+uint16_t dutyPWM_calCCR(TIM_TypeDef* TIMx,uint16_t duty,uint16_t ARR)
 {
-	return (duty<100)?(TIMx->ARR+1)*duty/100:TIMx->ARR;
+	uint16_t out=(duty<100)?(ARR+1)*duty/100:ARR;
+	OLED_ShowNum(4,1,out,5);
+	return out;
 }
 
 void PWMI_setMODE(TIM_TypeDef* TIMx,uint16_t TIM_Channel_x)
@@ -152,7 +166,15 @@ void PWMI_setMODE(TIM_TypeDef* TIMx,uint16_t TIM_Channel_x)
 		{
 				return (TIM_GetCapture4(TIMx) + 1) * 100 / (TIM_GetCapture1(TIMx) + 1);	
 		}
+		
+void TIM_OCxInit(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStructure_x,uint16_t INDEX){
 
+	if(INDEX&0x01)TIM_OC1Init(TIMx,TIM_OCInitStructure_x);
+	if(INDEX&0x02)TIM_OC2Init(TIMx,TIM_OCInitStructure_x);
+	if(INDEX&0x04)TIM_OC3Init(TIMx,TIM_OCInitStructure_x);
+	if(INDEX&0x08)TIM_OC4Init(TIMx,TIM_OCInitStructure_x);
+
+}
 
 void sADC_setMODE(uint8_t ADC_Channel_x,ADC_TypeDef* ADCx)
 {
