@@ -44,6 +44,27 @@
 #define ENCODERa_PIN GPIO_Pin_1
 #define ENCODERb_PIN GPIO_Pin_5
 
+//5.communication_CONFIG
+
+#define USART1hexS_SIZE 4
+#define USART1hexR_SIZE 4
+#define USART2hexS_SIZE 4
+#define USART2hexR_SIZE 4
+#define USART3hexS_SIZE 4
+#define USART3hexR_SIZE 4
+//in template there is no reference, integrate config is needed
+
+
+//6.MPU6050_CONFIG
+#define MPU_Port GPIOB
+#define MPU_SDA_PIN GPIO_Pin_11
+#define MPU_SCL_PIN GPIO_Pin_10
+//<MPU6050_I2C.h 12-15>to be altered
+//7.grey_CONFIG
+#define GREY_Port GPIOB
+#define GREY_SDA_PIN GPIO_Pin_11
+#define GREY_SCL_PIN GPIO_Pin_10
+
 
 /*******Section2:index Setup
 1.Speed*/
