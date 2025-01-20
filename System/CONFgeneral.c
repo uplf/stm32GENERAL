@@ -39,6 +39,7 @@ void reuse_init(){
 }
 
 //section2
+#include "comCONFgeneral.h"
 void EXTI_setGROUP(uint32_t NVIC_PriorityGroup_x){
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_x);	
 }
@@ -53,9 +54,9 @@ int8_t gpioINT_setEXTI(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin_x,EXTITrigger_Type
 	EXTI_InitStructure.EXTI_Line = GPIOPinToEXTILine(GPIO_Pin_x);					//选择配置外部中断的14号线
 	EXTI_InitStructure.EXTI_LineCmd = ENABLE;					//指定外部中断线使能
 	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;			//指定外部中断线为中断模式
-	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;		//指定外部中断线为下降沿触发
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_x;		//指定外部中断线为下降沿触发
 	EXTI_Init(&EXTI_InitStructure);								//将结构体变量交给EXTI_Init，配置EXTI外设
-	return EXTILineToIRQn(EXTI_InitStructure.EXTI_Line);
+	return EXTILineToIRQn(GPIOPinToEXTILine(GPIO_Pin_x));
 }
 
 int8_t timerINT_preset(TIM_TypeDef* TIMx)

@@ -37,6 +37,7 @@ extern uint8_t Serial_RxFlag;					//定义接收数据包标志位
 		int fputc(int ch, FILE *f);
 		void Serial_Printf(USART_TypeDef* USARTx,char *format, ...);
 		uint8_t Serial_GetRxFlag(USART_TypeDef* USARTx);
+		void Serial_SendPacket(USART_TypeDef* USARTx);
 		 
 
 	//part2:IIC setting

@@ -26,8 +26,24 @@
 #define DRIVE_BIN1_PIN GPIO_Pin_13
 #define DRIVE_BIN2_PIN GPIO_Pin_12
 
+
 //3.CONFIG
 #define REUSE_INIT 1
+
+//4.CTRL_PINS
+//head to <key.h->to alter key_PIN_CONFIG
+#define KEY_1_Port GPIOA
+#define KEY_1_PIN GPIO_Pin_11
+#define KEY_2_Port GPIOA
+#define KEY_2_PIN GPIO_Pin_12
+#define KEY_3_Port GPIOA
+#define KEY_3_PIN GPIO_Pin_15
+
+//head to <key.h->to alter encoder_PIN_CONFIG
+#define ENCODER_Port GPIOB
+#define ENCODERa_PIN GPIO_Pin_1
+#define ENCODERb_PIN GPIO_Pin_5
+
 
 /*******Section2:index Setup
 1.Speed*/
@@ -35,6 +51,8 @@
 //1-100
 #define ALTER_UNIT 1
 #define INV_ABLE 1
+
+
 
 
 #endif
