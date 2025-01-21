@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\Hardware\Mpu6050</IncludePath>
+              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\Hardware\Mpu6050;.\Hardware\W25Q</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -864,6 +864,21 @@
               <FileName>MPU6050_I2C.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\Mpu6050\MPU6050_I2C.h</FilePath>
+            </File>
+            <File>
+              <FileName>W25Q64.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\W25Q\W25Q64.c</FilePath>
+            </File>
+            <File>
+              <FileName>W25Q64.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\W25Q\W25Q64.h</FilePath>
+            </File>
+            <File>
+              <FileName>W25Q64_Ins.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\W25Q\W25Q64_Ins.h</FilePath>
             </File>
           </Files>
         </Group>

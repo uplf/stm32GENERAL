@@ -12,11 +12,7 @@ uint8_t grey_dec;
 
 
 void GREY_init(){
-	g.pinGroupSCL=GREY_Port;
-	g.pinGroupSDA=GREY_Port;
-	g.pinSCL=GREY_SCL_PIN;
-	g.pinSDA=GREY_SDA_PIN;
-	
+	IIC_setGROUP(&g,GREY_Port,GREY_SCL_PIN,GREY_Port,GREY_SDA_PIN);
 }
 
 

@@ -9,6 +9,9 @@
 #include "key.h"
 #include "map.h"
 #include "mpu6050.h"
+#include "grey.h"
+#include "userSetup.h"
+#include "W25Q64.h"
 
 //end of test area
 int status=0;
@@ -24,23 +27,24 @@ void Setup(void){
 	OLED_Init();
 	drive_init();
 	MPU6050_Init();
+	GREY_init();
+	W25Q64_Init();
 
-
-	//SERIAL_sendNUM(USART1,1,4);
 }
 
-short A,B,C;
 
+uint8_t rx[]={1,2,3};
+uint8_t wx[3];
 int main(void)
 {
+
 	Setup();
+	W25Q64_ReadData(0x00,wx,3);
 	while (1)
 	{
-		MPU_Get_Gyroscope(&A,&B,&C);
-		OLED_ShowSignedNum(1,1,A,5);
-		OLED_ShowSignedNum(2,1,B,5);
-		OLED_ShowSignedNum(3,1,C,5);
-		Delay_ms(500);
+		OLED_ShowNum(1,1,wx[0],3);
+		OLED_ShowNum(2,1,wx[1],3);
+		OLED_ShowNum(3,1,wx[2],3);
 	}
 
 }

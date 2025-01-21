@@ -1,5 +1,8 @@
 #ifndef __PIN_SETUP
 #define __PIN_SETUP
+#include "stm32f10x.h"                  // Device header
+
+
 
 /*******Section0:ATTENTION
 1.<PIN>SPI communication is fixed attached to the following pins, which means these pins can't
@@ -74,6 +77,9 @@
 #define INV_ABLE 1
 
 
+/********Section3:全局变量
+*/
+extern int8_t GREY_INDEX;
 
 
 #endif
