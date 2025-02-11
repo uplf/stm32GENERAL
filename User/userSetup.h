@@ -1,5 +1,5 @@
-#ifndef __PIN_SETUP
-#define __PIN_SETUP
+#ifndef __USER_SETUP_H
+#define __USER_SETUP_H
 #include "stm32f10x.h"                  // Device header
 
 
@@ -49,13 +49,7 @@
 
 //5.communication_CONFIG
 
-#define USART1hexS_SIZE 4
-#define USART1hexR_SIZE 4
-#define USART2hexS_SIZE 4
-#define USART2hexR_SIZE 4
-#define USART3hexS_SIZE 4
-#define USART3hexR_SIZE 4
-//in template there is no reference, integrate config is needed
+#define CMD_USART USART1
 
 
 //6.MPU6050_CONFIG

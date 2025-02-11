@@ -231,5 +231,6 @@ int32_t USARTxtoIRQn(USART_TypeDef *USARTx)
 }
 
 
-
+//for variable 
+//uint16_t** addr_mapDOUBLE[]={};
 

@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\Hardware\Mpu6050;.\Hardware\W25Q</IncludePath>
+              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\Hardware\Mpu6050;.\Hardware\W25Q;.\Hardware\USARTcmd</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -769,6 +769,16 @@
               <FileName>grey.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\grey.h</FilePath>
+            </File>
+            <File>
+              <FileName>USARTcmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\USARTcmd\USARTcmd.c</FilePath>
+            </File>
+            <File>
+              <FileName>USARTcmd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\USARTcmd\USARTcmd.h</FilePath>
             </File>
           </Files>
         </Group>

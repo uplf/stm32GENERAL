@@ -14,15 +14,15 @@
 #include "W25Q64.h"
 
 //end of test area
+
+//TIP****
 int status=0;
 uint8_t x[]={0x1,0x2,0x3,0x4};
 
 
 void Setup(void){
 	Encoder_Init();
-	USART_setMODE(USART1,115200);
-	USART_Cmd(USART1,ENABLE);
-	INT_setNVIC(usartINT_set(USART1),1,1,ENABLE);
+	USARTdebug_init();
 	reuse_init();
 	OLED_Init();
 	drive_init();

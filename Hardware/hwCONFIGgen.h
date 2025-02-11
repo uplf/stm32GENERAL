@@ -1,5 +1,5 @@
-#ifndef __HW_CONF_GENERAL
-#define __HW_CONF_GENERAL
+#ifndef __HW_CONF_GENERAL_H
+#define __HW_CONF_GENERAL_H
 
 #include "stm32f10x.h"                  // Device header
 #include "userSetup.h"
@@ -11,6 +11,9 @@
 //IIC source
 void I2C_writeREG(IIC_group g,uint8_t slaveADDR, uint8_t regADDR,uint8_t data);//Î´²âÊÔ
 uint8_t readREG(IIC_group g,uint8_t slaveADDR,uint8_t regADDR);//Î´²âÊÔ
+
+//´®¿Úµ÷ÊÔ·½·¨
+void USARTdebug_init();
 
 
 
