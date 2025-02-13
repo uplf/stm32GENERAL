@@ -15,8 +15,8 @@
 */
 
 //OLED_PINS
-#define OLED_W_SCL_Pin GPIO_Pin_3
-#define OLED_W_SDA_Pin GPIO_Pin_4
+#define OLED_W_SCL_Pin GPIO_Pin_4
+#define OLED_W_SDA_Pin GPIO_Pin_3
 #define OLED_W_Port GPIOB
 
 //2.TB6612 conf_PINS
