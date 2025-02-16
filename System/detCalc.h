@@ -9,16 +9,22 @@ typedef struct{
 	float I;
 	float D;
 	
-	int16_t LastError;
-	int16_t PrevError;
-	int16_t IntegralError;
+	float LastError;
+	float PrevError;
+	float IntegralError;
 	
-	int16_t target;
-	int16_t current;
+	float target;
+	float current;
 	int8_t circleCalc;
-}PIDgroup;
+}PIDgroup,PIDangle;
 
 void pidCalc(PIDgroup*,int16_t*);
 void DrivePidCalc(PIDgroup*,PIDgroup*,int16_t*,int16_t*);
+void PIDgroupInit();
 
+extern PIDgroup GreyLeft;
+extern PIDgroup GreyRight;
+
+extern PIDangle AngleLeft;
+extern PIDangle AngleRight;
 #endif

@@ -25,7 +25,7 @@ void drive_setPWM34(int16_t duty3,int16_t duty4){
 	drive_setPWM4(duty4);
 }
 void drive_DIFFsetPWM34(int16_t DIFFduty){
-	drive_setPWM34(BASIC_SPEED+DIFFduty,BASIC_SPEED-DIFFduty);
+	drive_setPWM34(BASIC_SPEEDR+DIFFduty,BASIC_SPEEDL-DIFFduty);
 }
 
 

@@ -78,13 +78,16 @@ uint8_t grey_scancal(int8_t* tmp)
 		*tmp=outp;							//否则保持上一个输出
 		return 1;
 	}
+	//--=-----             0
+	//=------- -> -------- 1
+	
 	if((m0&(~(0x18)))==0)			//若45位以外没有东西，则输出0
 	{
 		outp=0;
 		*tmp=outp;
 		return 0;
 	}
-	if((m0&0xF0)&&(m0&0x0F))	//若两侧都有东西，则输出0
+	if((m0&0xF0)&&(m0&0x0F))		//若两侧都有东西，则输出0
 	{
 		outp=0;
 		*tmp=outp;
@@ -93,6 +96,7 @@ uint8_t grey_scancal(int8_t* tmp)
 
 	if(m0&0x0F)								//其他情况按照最外侧所对应的值输出
 	{
+		//4,3,2,1
 		for(flag=4;flag;flag--)
 		{
 			if(m0&0x01)
@@ -107,6 +111,7 @@ uint8_t grey_scancal(int8_t* tmp)
 	if(m0&0xF0)
 	{
 		m0=m0>>4;
+		//-1,-2,-3,-4
 		for(flag=-1;flag>=-4;flag--)
 		{
 			temp=m0;
@@ -123,8 +128,8 @@ uint8_t grey_scancal(int8_t* tmp)
 
 void grey_recal(int8_t* tmp)
 {
-	if(*tmp>1)*tmp-=1;
-	if(*tmp<-1)*tmp+=1;
+	if(*tmp>=1)*tmp-=1;
+	if(*tmp<=-1)*tmp+=1;
 	return;
 }
 

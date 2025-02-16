@@ -65,8 +65,8 @@
 
 /*******Section2:index Setup
 1.Speed*/
-#define BASIC_SPEEDL 50
-#define BASIC_SPEEDR 50
+#define BASIC_SPEEDL 75
+#define BASIC_SPEEDR 75
 //1-100
 #define ALTER_UNIT 1
 #define INV_ABLE 1
@@ -75,6 +75,11 @@
 /********Section3:全局变量
 */
 extern int8_t GREY_INDEX;
+
+extern int16_t SpeedR;
+extern int16_t SpeedL;
+
+
 
 
 #endif
