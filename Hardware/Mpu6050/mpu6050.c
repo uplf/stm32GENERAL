@@ -105,7 +105,7 @@ void MPU6050_Init(void)
 	MPU_Set_Rate(200);						//设置采样率50Hz
 	mpu6050_write_reg(MPU_INT_EN_REG,0X00);	//关闭所有中断
 	mpu6050_write_reg(MPU_USER_CTRL_REG,0X00);	//I2C主模式关闭
-	mpu6050_write_reg(MPU_FIFO_EN_REG,0X00);	//关闭FIFO
+	mpu6050_write_reg(MPU_FIFO_EN_REG,0Xff);	//关闭FIFO
 	mpu6050_write_reg(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
 	res=mpu6050_read_reg(MPU_DEVICE_ID_REG); 
 	if(res==MPU_ADDR)//器件ID正确

@@ -59,7 +59,7 @@ u8 run_self_test(void)
     long gyro[3], accel[3];
 
     result = mpu_run_self_test(gyro, accel);
-    if (result == 0x3) {
+    if (result == 0x7) {
         /* Test passed. We can trust the gyro data here, so let's push it down
          * to the DMP.
          */
