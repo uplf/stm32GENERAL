@@ -700,6 +700,16 @@
               <FileType>5</FileType>
               <FilePath>.\System\sys.h</FilePath>
             </File>
+            <File>
+              <FileName>detCalc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\System\detCalc.c</FilePath>
+            </File>
+            <File>
+              <FileName>detCalc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\System\detCalc.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -65,7 +65,8 @@
 
 /*******Section2:index Setup
 1.Speed*/
-#define BASIC_SPEED 50
+#define BASIC_SPEEDL 50
+#define BASIC_SPEEDR 50
 //1-100
 #define ALTER_UNIT 1
 #define INV_ABLE 1
