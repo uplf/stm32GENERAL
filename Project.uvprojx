@@ -710,6 +710,16 @@
               <FileType>5</FileType>
               <FilePath>.\System\detCalc.h</FilePath>
             </File>
+            <File>
+              <FileName>Interrupt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\System\Interrupt.c</FilePath>
+            </File>
+            <File>
+              <FileName>Interrupt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\System\Interrupt.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

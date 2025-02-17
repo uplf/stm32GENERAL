@@ -50,7 +50,7 @@ int main(void)
 
 	Setup();
 	
-	
+	//角度PID
 	while(!Key_GetNum())
 	{
 		MPU6050_DMP_Get_Data(&Pitch,&Roll,&Yaw);
@@ -64,8 +64,9 @@ int main(void)
 	
 	while (1)
 	{
+		//速度PID
 		/*
-		if(grey_scancal(&GREY_INDEX)!=2){
+			if(grey_scancal(&GREY_INDEX)!=2){
 			grey_recal(&GREY_INDEX);
 			GreyRight.current=GREY_INDEX;
 			GreyLeft.current=GREY_INDEX;
@@ -73,6 +74,7 @@ int main(void)
 			drive_setPWM34(SpeedR,SpeedL);
 		}
 		*/
+		//角度PID
 		if(MPU6050_DMP_Get_Data(&Pitch,&Roll,&Yaw)==0)
 		{
 			AngleLeft.current=Yaw;
@@ -83,6 +85,7 @@ int main(void)
 
 		OLED_ShowBinNum(2,1,Read_GREY(),8);
 		Delay_ms(5);
+		
 	}
 
 }
