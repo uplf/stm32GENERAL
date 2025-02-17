@@ -78,6 +78,8 @@ extern int8_t GREY_INDEX;
 
 extern int16_t SpeedR;
 extern int16_t SpeedL;
+extern float Pitch,Roll,Yaw,TargetAngle;
+extern int8_t wytest;
 
 
 

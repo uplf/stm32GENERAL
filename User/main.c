@@ -14,6 +14,7 @@
 #include "userSetup.h"
 #include "W25Q64.h"
 #include "detCalc.h"
+#include "Interrupt.h"
 
 //end of test area
 
@@ -24,6 +25,8 @@ uint8_t x[]={0x1,0x2,0x3,0x4};
 float Axo,Ayo,Azo;	//各个姿态角的初始值
 float Axc,Ayc,Azc;		//各个姿态角的检测值
 float Axt,Ayt,Azt;	//各个姿态角的目标值
+
+int8_t wytest=0;
 
 void Setup(void){
 	//Encoder_Init();
@@ -36,6 +39,7 @@ void Setup(void){
 	MPU6050_DMP_Init();
 	GREY_init();
 	PIDgroupInit();
+	intInit();
 	//W25Q64_Init();
 
 }
@@ -53,10 +57,9 @@ int main(void)
 	//角度PID
 	while(!Key_GetNum())
 	{
-		MPU6050_DMP_Get_Data(&Pitch,&Roll,&Yaw);
-		MPU_Get_Gyroscope(&gx,&gy,&gz);
-		MPU_Get_Accelerometer(&ax,&ay,&az);
+
 		OLED_ShowSignedNum(1,1,Yaw,5);
+		OLED_ShowSignedNum(2,1,wytest,5);
 		Delay_ms(5);
 	}
 	AngleLeft.target=Yaw;
@@ -74,14 +77,7 @@ int main(void)
 			drive_setPWM34(SpeedR,SpeedL);
 		}
 		*/
-		//角度PID
-		if(MPU6050_DMP_Get_Data(&Pitch,&Roll,&Yaw)==0)
-		{
-			AngleLeft.current=Yaw;
-			AngleRight.current=Yaw;
-			DrivePidCalc(&AngleRight,&AngleLeft,&SpeedR,&SpeedL);
-			drive_setPWM34(SpeedR,SpeedL);
-		}
+		
 
 		OLED_ShowBinNum(2,1,Read_GREY(),8);
 		Delay_ms(5);

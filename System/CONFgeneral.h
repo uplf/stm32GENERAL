@@ -172,7 +172,7 @@ void USART1_IRQHandler(void)
 	void freqTIMER_setMODE(TIM_TypeDef* TIMx,uint16_t freq,uint16_t TIM_CounterMode_x);
 		//attention: 1.freq refers to CK_CNT_OV(overflow) 2. ARR->10000  3.CK_PSC->72M	
 
-//step2:apply <section2->step2> for INT, <following> for OC & IC
+//step2:apply <section2->step1> for INT, <following> for OC & IC
 	//step2(PWM).1,setPWMmode
 		void PWM_setMODE(TIM_TypeDef* TIMx,uint16_t INDEX);
 	//step2(PWM).2,IO_AF
