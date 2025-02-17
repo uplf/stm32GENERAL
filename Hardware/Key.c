@@ -18,8 +18,6 @@ void Key_Init(void)
 	PIN_setMODE(KEY_2_Port,KEY_2_PIN,GPIO_Mode_IPU);
 	PIN_setMODE(KEY_3_Port,KEY_3_PIN,GPIO_Mode_IPU);
 
-	
-	
 }
 
 

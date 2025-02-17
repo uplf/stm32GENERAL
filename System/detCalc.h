@@ -21,6 +21,9 @@ typedef struct{
 void pidCalc(PIDgroup*,int16_t*);
 void DrivePidCalc(PIDgroup*,PIDgroup*,int16_t*,int16_t*);
 void PIDgroupInit();
+//void CirCal
+void CirCal(int16_t *);
+void CirCalF(float *);
 
 extern PIDgroup GreyLeft;
 extern PIDgroup GreyRight;

@@ -74,7 +74,7 @@ uint8_t grey_scancal(int8_t* tmp)
 	grey_dec=m0;
 	if(m0==0)									//未检测到情况下
 	{ 
-		if(!outp)return 2;			//若上一个输出为0，报错
+		if(!outp)return 3;			//若上一个输出为0，报错
 		*tmp=outp;							//否则保持上一个输出
 		return 1;
 	}
